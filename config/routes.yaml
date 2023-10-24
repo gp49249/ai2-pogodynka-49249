@@ -3,3 +3,15 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+weather:
+    path: /weather/{id}
+    controller: App\Controller\WeatherController::city
+    requirements:
+        id: '\d+'
+
+app_weather:
+    path: '/weather/{cityName}'
+    controller: 'App\Controller\WeatherController::city'
+    requirements:
+        cityName: '[A-Za-z]+'
