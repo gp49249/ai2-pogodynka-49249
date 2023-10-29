@@ -1,0 +1,52 @@
+App\Entity\City:
+  properties:
+
+    Latitude:
+      - Range:
+          min: -90
+          max: 90
+          groups: ['create', 'edit']
+
+    Longitude:
+      - Range:
+          min: -180
+          max: 180
+          groups: ['create', 'edit']
+
+    CityName:
+      - NotBlank:
+          groups: ['create', 'edit']
+
+    CountryCode:
+      - NotBlank:
+          groups: ['create', 'edit']
+
+App\Entity\Forecast:
+  properties:
+    Date:
+      - NotBlank:
+          groups: ['create', 'edit']
+    Temperature:
+      - NotBlank:
+          groups: ['create', 'edit']
+      - Range:
+          min: -20
+          max: 40
+          groups: ['create', 'edit']
+    Rainfall:
+      - NotBlank:
+          groups: ['create', 'edit']
+      - GreaterThanOrEqual:
+          value: 0
+          groups: ['create', 'edit']
+    Humidity:
+      - NotBlank:
+          groups: ['create', 'edit']
+      - GreaterThanOrEqual:
+          value: 0
+          groups: ['create', 'edit']
+    Wind:
+      - Choice:
+          choices: ['Calm', 'Moderate', 'Strong']
+          message: 'Invalid wind value. Choose from Calm, Moderate, or Strong.'
+          groups: ['create', 'edit']

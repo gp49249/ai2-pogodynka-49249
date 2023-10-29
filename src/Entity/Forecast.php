@@ -16,7 +16,7 @@ class Forecast
 
     #[ORM\ManyToOne(inversedBy: 'forecasts')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?city $city = null;
+    private ?City $city = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $Date = null;
