@@ -2,24 +2,32 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
+use App\Service\WeatherUtil;
+use App\Repository\CityRepository; // Dodaj to
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\CityRepository;
-use App\Repository\ForecastRepository;
 
 class WeatherController extends AbstractController
 {
-    #[Route('/weather/{cityName}', name: 'app_weather')]
-    public function city(string $cityName, CityRepository $cityRepository, ForecastRepository $repository): Response
+    private CityRepository $cityRepository; // Dodaj to
+
+    public function __construct(CityRepository $cityRepository) // Dodaj to
     {
-        $city = $cityRepository->findOneBy(['CityName' => $cityName]);
-        $forecasts = $repository->findByCity($city);
+        $this->cityRepository = $cityRepository;
+    }
+
+    #[Route('/weather/{cityName}', name: 'app_weather')]
+    public function city(string $cityName, WeatherUtil $util): Response
+    {
+        $city = $this->cityRepository->findOneBy(['CityName' => $cityName]);
+        $forecasts = $util->getWeatherForLocation($city);
 
         return $this->render('weather/city.html.twig', [
             'city' => $city,
-            'forecast' => $forecasts,
+            'forecasts' => $forecasts,
         ]);
     }
 }
-

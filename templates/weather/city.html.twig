@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {# @var city \App\Entity\City #}
-{# @var forecast \App\Entity\Forecast #}
+{# @var forecasts \App\Entity\Forecast[] #}
 
-{% block title %}Weather in {{ city.CityName }}, {{ city.CountryCode }}{% endblock %}
+{% block title %}Weather in {{ city.getCityName() }}, {{ city.getCountryCode() }}{% endblock %}
 
 {% block body %}
     <style>
@@ -12,20 +12,12 @@
     </style>
 
     <main>
-        <h1>Weather in {{ city.CityName }}, {{ city.CountryCode }}</h1>
+        <h1>Weather in {{ city.getCityName() }}, {{ city.getCountryCode() }}</h1>
 
         <ul>
-            {% for forecast in forecast %}
-                <li>{{ forecast.Date|date('d.m.Y') }}: {{ forecast.Temperature }}&deg;C</li>
+            {% for forecast in forecasts %}
+                <li>{{ forecast.getDate()|date('d.m.Y') }}: {{ forecast.getTemperature() }}&deg;C</li>
             {% endfor %}
         </ul>
     </main>
-
-{#    <div class="example-wrapper">#}
-{#        This friendly message is coming from:#}
-{#        <ul>#}
-{#            <li>Your controller at <code><a href="{{ 'C:/Users/patry/OneDrive/Pulpit/Studia/6 semestr poprawa/Aplikacje internetowe 2/Laboratoria/LAB03/AI2-lab/pogodynka/src/Controller/WeatherController.php'|file_link(0) }}">src/Controller/WeatherController.php</a></code></li>#}
-{#            <li>Your template at <code><a href="{{ 'C:/Users/patry/OneDrive/Pulpit/Studia/6 semestr poprawa/Aplikacje internetowe 2/Laboratoria/LAB03/AI2-lab/pogodynka/templates/weather/city.html.twig'|file_link(0) }}">templates/weather/city.html.twig</a></code></li>#}
-{#        </ul>#}
-{#    </div>#}
 {% endblock %}

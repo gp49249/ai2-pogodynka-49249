@@ -16,6 +16,13 @@ app_weather:
     requirements:
         cityName: '[A-Za-z]+'
 
+app_weather_country:
+    path: '/weather/{countryCode}/{cityName}'
+    controller: 'App\Controller\WeatherController::city'
+    requirements:
+        country: '[A-Za-z]+'
+        cityName: '[A-Za-z]+'
+
 app_city_index:
     path: /city/
     controller: 'App\Controller\CityController::index'

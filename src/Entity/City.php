@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class City
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column]
     private ?int $id = null;
 
@@ -58,9 +58,9 @@ class City
         return $this->CountryCode;
     }
 
-    public function setCountryCode(string $CountryCode): static
+    public function setCountryCode(string $countryCode): self
     {
-        $this->CountryCode = $CountryCode;
+        $this->CountryCode = $countryCode;
 
         return $this;
     }
