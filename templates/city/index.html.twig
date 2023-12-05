@@ -7,14 +7,14 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>CityName</th>
-                <th>CountryCode</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>CityName</th>
+            <th>CountryCode</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for city in cities %}
@@ -27,6 +27,9 @@
                 <td>
                     <a href="{{ path('app_city_show', {'id': city.id}) }}" class="btn btn-info">Show</a>
                     <a href="{{ path('app_city_edit', {'id': city.id}) }}" class="btn btn-primary">Edit</a>
+                    {% if is_granted('ROLE_CITY_DELETE      ', city) %}
+                        <a href="{{ path('app_city_delete', {'id': city.id}) }}" class="btn btn-danger">Delete</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -37,5 +40,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_city_new') }}" class="btn btn-primary">Create new</a>
+    {% if is_granted('ROLE_CITY_NEW') %}
+        <a href="{{ path('app_city_new') }}" class="btn btn-success">Create new</a>
+    {% endif %}
 {% endblock %}

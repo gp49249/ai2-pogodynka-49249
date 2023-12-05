@@ -37,6 +37,15 @@
                 </li>
             </ul>
         </div>
+        {% if is_granted('ROLE_USER') %}
+            <form class="d-flex">
+                <button class="btn btn-primary" type="submit"><a style="color: white; text-decoration: none;" href="{{ path('app_logout') }}">LOG OUT</a></button>
+            </form>
+        {% else %}
+            <form class="d-flex">
+                <button class="btn btn-primary" type="submit"><a style="color: white; text-decoration: none;" href="{{ path('app_login') }}">LOG IN</a></button>
+            </form>
+        {% endif %}
     </div>
 </nav>
 <div class="container">

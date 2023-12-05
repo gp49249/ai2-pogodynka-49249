@@ -7,15 +7,15 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Temperature</th>
-                <th>Rainfall</th>
-                <th>Humidity</th>
-                <th>Wind</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Temperature</th>
+            <th>Rainfall</th>
+            <th>Humidity</th>
+            <th>Wind</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for forecast in forecasts %}
@@ -29,6 +29,9 @@
                 <td>
                     <a href="{{ path('app_forecast_show', {'id': forecast.id}) }}" class="btn btn-info">Show</a>
                     <a href="{{ path('app_forecast_edit', {'id': forecast.id}) }}" class="btn btn-primary">Edit</a>
+                    {% if is_granted('ROLE_FORECAST_DELETE', forecast) %}
+                        <a href="{{ path('app_forecast_delete', {'id': forecast.id}) }}" class="btn btn-danger">Delete</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -39,5 +42,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_forecast_new') }}" class="btn btn-primary">Create new</a>
+    {% if is_granted('ROLE_FORECAST_NEW') %}
+        <a href="{{ path('app_forecast_new') }}" class="btn btn-success">Create new</a>
+    {% endif %}
 {% endblock %}

@@ -19,3 +19,8 @@ app_weather:
 app_city_index:
     path: /city/
     controller: 'App\Controller\CityController::index'
+
+app_logout:
+    path: /logout
+    methods: GET
+
